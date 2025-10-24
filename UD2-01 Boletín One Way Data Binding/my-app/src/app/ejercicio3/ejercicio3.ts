@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./ejercicio3.css']
 })
 export class Ejercicio3 {
+  colorTexto = 'black'
 
+  alternarColor(){
+    this.colorTexto = this.colorTexto === 'black' ? 'red' : 'black';
+  }
 }

@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./ejercicio4.css']
 })
 export class Ejercicio4 {
+  luzEncendida = false;
 
+  alternarLuz(){
+    this.luzEncendida = !this.luzEncendida
+  }
 }

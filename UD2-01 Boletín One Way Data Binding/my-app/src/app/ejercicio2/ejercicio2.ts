@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./ejercicio2.css']
 })
 export class Ejercicio2 {
+  titulo = 'Bienvenido'
 
+  cambiarTitulo(){
+    this.titulo = 'Titulo cambiado coñasosaso';
+  }
 }

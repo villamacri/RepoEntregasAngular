@@ -1,1 +1,9 @@
-<p>ejercicio4 works!</p>
+<img 
+    [src]="luzEncendida ? 'https://cdn-icons-png.flaticon.com/512/702/702814.png' : 'https://cdn-icons-png.flaticon.com/512/702/702797.png'"
+    alt="Bombilla"
+    width="100"
+/>
+<br/>
+<button (click)="alternarLuz()">
+    {{ luzEncendida ? 'Encender' : 'Apagar'}}
+</button>
