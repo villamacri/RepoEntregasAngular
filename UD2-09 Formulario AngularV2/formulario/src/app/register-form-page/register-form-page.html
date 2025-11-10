@@ -1,0 +1,177 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Formulario de Registro</h2>
+          
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            
+            <!-- Nombre -->
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input 
+                type="text" 
+                id="nombre" 
+                formControlName="nombre" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('nombre')?.invalid && formGroup.get('nombre')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('nombre')?.invalid && formGroup.get('nombre')?.touched">
+                <div *ngIf="formGroup.get('nombre')?.errors?.['required']">El nombre es obligatorio</div>
+                <div *ngIf="formGroup.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</div>
+              </div>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="mb-3">
+              <label for="apellidos" class="form-label">Apellidos:</label>
+              <input 
+                type="text" 
+                id="apellidos" 
+                formControlName="apellidos" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('apellidos')?.invalid && formGroup.get('apellidos')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('apellidos')?.invalid && formGroup.get('apellidos')?.touched">
+                <div *ngIf="formGroup.get('apellidos')?.errors?.['required']">Los apellidos son obligatorios</div>
+                <div *ngIf="formGroup.get('apellidos')?.errors?.['minlength']">Los apellidos deben tener al menos 3 caracteres</div>
+              </div>
+            </div>
+
+            <!-- NIF -->
+            <div class="mb-3">
+              <label for="nif" class="form-label">NIF/NIE:</label>
+              <input 
+                type="text" 
+                id="nif" 
+                formControlName="nif" 
+                placeholder="12345678A o X1234567A" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('nif')?.invalid && formGroup.get('nif')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('nif')?.invalid && formGroup.get('nif')?.touched">
+                <div *ngIf="formGroup.get('nif')?.errors?.['required']">El NIF/NIE es obligatorio</div>
+                <div *ngIf="formGroup.get('nif')?.errors?.['pattern']">Formato inválido. Debe ser 8 números + letra o X/Y/Z + 7 números + letra</div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input 
+                type="email" 
+                id="email" 
+                formControlName="email" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+                <div *ngIf="formGroup.get('email')?.errors?.['required']">El email es obligatorio</div>
+                <div *ngIf="formGroup.get('email')?.errors?.['email']">El formato del email no es válido</div>
+              </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono:</label>
+              <input 
+                type="tel" 
+                id="telefono" 
+                formControlName="telefono" 
+                placeholder="123456789" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('telefono')?.invalid && formGroup.get('telefono')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('telefono')?.invalid && formGroup.get('telefono')?.touched">
+                <div *ngIf="formGroup.get('telefono')?.errors?.['required']">El teléfono es obligatorio</div>
+                <div *ngIf="formGroup.get('telefono')?.errors?.['pattern']">El teléfono debe tener exactamente 9 dígitos</div>
+              </div>
+            </div>
+
+            <!-- Sexo -->
+            <div class="mb-3">
+              <label class="form-label">Sexo:</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="masculino" formControlName="sexo" value="masculino">
+                  <label class="form-check-label" for="masculino">Masculino</label>
+                </div>
+                
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="femenino" formControlName="sexo" value="femenino">
+                  <label class="form-check-label" for="femenino">Femenino</label>
+                </div>
+                
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="otro" formControlName="sexo" value="otro">
+                  <label class="form-check-label" for="otro">Otro</label>
+                </div>
+              </div>
+              <div class="text-danger small" *ngIf="formGroup.get('sexo')?.invalid && formGroup.get('sexo')?.touched">
+                Debe seleccionar una opción
+              </div>
+            </div>
+
+            <!-- Cómo conoció la página -->
+            <div class="mb-3">
+              <label for="conocidoPor" class="form-label">¿Cómo conoció la página?</label>
+              <select 
+                id="conocidoPor" 
+                formControlName="conocidoPor" 
+                class="form-select"
+                [class.is-invalid]="formGroup.get('conocidoPor')?.invalid && formGroup.get('conocidoPor')?.touched">
+                <option value="">Seleccione una opción</option>
+                <option value="google">Buscando en Google</option>
+                <option value="amigo">A través de un amigo</option>
+                <option value="profesor">Por mi profesor</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="formGroup.get('conocidoPor')?.invalid && formGroup.get('conocidoPor')?.touched">
+                Debe seleccionar cómo conoció la página
+              </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+              <label for="contraseña" class="form-label">Contraseña:</label>
+              <input 
+                type="password" 
+                id="contraseña" 
+                formControlName="contraseña" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('contraseña')?.invalid && formGroup.get('contraseña')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('contraseña')?.invalid && formGroup.get('contraseña')?.touched">
+                <div *ngIf="formGroup.get('contraseña')?.errors?.['required']">La contraseña es obligatoria</div>
+                <div *ngIf="formGroup.get('contraseña')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+              </div>
+            </div>
+
+            <!-- Confirmar Contraseña -->
+            <div class="mb-3">
+              <label for="confirmarContraseña" class="form-label">Confirmar Contraseña:</label>
+              <input 
+                type="password" 
+                id="confirmarContraseña" 
+                formControlName="confirmarContraseña" 
+                class="form-control"
+                [class.is-invalid]="formGroup.get('confirmarContraseña')?.invalid && formGroup.get('confirmarContraseña')?.touched">
+              <div class="invalid-feedback" *ngIf="formGroup.get('confirmarContraseña')?.invalid && formGroup.get('confirmarContraseña')?.touched">
+                Debe confirmar la contraseña
+              </div>
+            </div>
+
+            <!-- Términos y Condiciones -->
+            <div class="mb-3 form-check">
+              <input type="checkbox" id="aceptarTerminos" formControlName="aceptarTerminos" class="form-check-input">
+              <label for="aceptarTerminos" class="form-check-label">Acepto los términos y condiciones</label>
+              <div class="text-danger small" *ngIf="formGroup.get('aceptarTerminos')?.invalid && formGroup.get('aceptarTerminos')?.touched">
+                Debe aceptar los términos y condiciones
+              </div>
+            </div>
+
+            <!-- Botón de Registro -->
+            <div class="d-grid">
+              <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary btn-lg">Registro</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
