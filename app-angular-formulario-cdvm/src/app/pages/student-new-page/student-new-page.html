@@ -1,0 +1,23 @@
+<form>
+    <div class="mb-3">
+        <label for="nombre">Nombre: </label>
+        <input id="nombre" type="text" formControlName="nombre" class="form-control" [class.is-invalid]="formGroup.get('nombre')?.touched">
+    </div>
+    <div class="mb-3">
+        <label for="apellidos">Apellidos: </label>
+        <input type="text" id="apellidos" formControlName="apellidos" class="form-control" [class.is-invalid]="formGroup.get('apellidos')?.invalid && formGroup.get('apellidos')?.touched">
+    </div>
+        <div class="mb-3">
+        <label for="Dni">Dni: </label>
+        <input id="Dni" type="text" formControlName="dni" class="form-control" [class.is-invalid]="formGroup.get('dni')?.invalid && formGroup.get('dni')?.touched">
+    </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="1º DAM">1º DAM</label>
+  </div>
+    <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="1º DAM">2º DAM</label>
+  </div>
+  <button type="submit" class="btn btn-primary">agregar</button>
+</form>
