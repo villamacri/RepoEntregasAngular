@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1E3A5F;
+            --primary-blue: #60A5FA;
+            --primary-light: #F0F7FF;
+            --border-color: #CBD5E1;
+            --text-gray: #64748B;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-light);
+        }
+        
+        .sidebar {
+            width: 256px;
+            height: 100vh;
+            position: fixed;
+            background: white;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .sidebar-logo {
+            height: 69px;
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-menu {
+            padding: 16px;
+        }
+        
+        .menu-item {
+            padding: 8px 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: background 0.3s;
+        }
+        
+        .menu-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .menu-item.active {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        
+        .menu-item.active i {
+            color: white;
+        }
+        
+        .main-content {
+            margin-left: 256px;
+            padding: 32px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 16px;
+        }
+        
+        .feedback-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+        }
+        
+        .feedback-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #E0F2FE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+        
+        .tab-group {
+            background: #E0F2FE;
+            border-radius: 16px;
+            padding: 4px;
+            display: inline-flex;
+        }
+        
+        .tab-btn {
+            padding: 4px 8px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--primary-dark);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: white;
+            border: 1px solid transparent;
+        }
+        
+        .star-filled {
+            color: #F0B100;
+        }
+        
+        .star-empty {
+            color: #D1D5DC;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo d-flex align-items-center justify-content-between">
+            <img src="https://placehold.co/78x58" alt="Logo" style="width: 78px; height: 58px;">
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="Dashboard.html" class="menu-item">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="Usuarios.html" class="menu-item">
+                <i class="bi bi-people"></i>
+                <span>Usuarios</span>
+            </a>
+            <a href="Transacciones.html" class="menu-item">
+                <i class="bi bi-credit-card"></i>
+                <span>Transacciones</span>
+            </a>
+            <a href="LibrosPublicados.html" class="menu-item">
+                <i class="bi bi-book"></i>
+                <span>Libros</span>
+            </a>
+            <a href="Eventos.html" class="menu-item">
+                <i class="bi bi-calendar-event"></i>
+                <span>Eventos</span>
+            </a>
+            <a href="Reportes.html" class="menu-item">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Reportes</span>
+            </a>
+            <a href="Feedback.html" class="menu-item active">
+                <i class="bi bi-chat-square-text"></i>
+                <span>Feedback</span>
+            </a>
+        </div>
+        
+        <div style="position: absolute; bottom: 0; width: 100%; padding: 17px 16px; border-top: 1px solid var(--border-color);">
+            <a href="#" class="menu-item">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Cerrar sesión</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="mb-4">
+            <h2 class="fw-medium mb-0" style="color: var(--primary-dark);">Feedback de Usuarios</h2>
+            <p class="text-muted mb-0">Gestiona reseñas, sugerencias y quejas</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="text-muted mb-0">Rating Promedio</p>
+                        <i class="bi bi-star-fill" style="color: #F0B100;"></i>
+                    </div>
+                    <h5 class="mb-3" style="color: var(--primary-dark);">4.3</h5>
+                    <p class="text-muted mb-0">1543 reseñas</p>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="text-muted mb-0">Positivos</p>
+                        <i class="bi bi-emoji-smile" style="color: #00A63E;"></i>
+                    </div>
+                    <h5 class="mb-3" style="color: #00A63E;">1234</h5>
+                    <p class="text-muted mb-0">80.0%</p>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="text-muted mb-0">Neutrales</p>
+                        <i class="bi bi-chat-square-text" style="color: #D08700;"></i>
+                    </div>
+                    <h5 class="mb-3" style="color: #D08700;">245</h5>
+                    <p class="text-muted mb-0">15.9%</p>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="text-muted mb-0">Negativos</p>
+                        <i class="bi bi-emoji-frown" style="color: #E7000B;"></i>
+                    </div>
+                    <h5 class="mb-3" style="color: #E7000B;">64</h5>
+                    <p class="text-muted mb-0">4.1%</p>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="text-muted mb-0">Pendientes</p>
+                        <i class="bi bi-chat-square-text" style="color: #155DFC;"></i>
+                    </div>
+                    <h5 class="mb-3" style="color: #155DFC;">28</h5>
+                    <p class="text-muted mb-0">Por revisar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tab-group mb-4">
+            <button class="tab-btn active flex-fill" onclick="switchTab(0)">Todos</button>
+            <button class="tab-btn flex-fill" onclick="switchTab(1)">Reseñas</button>
+            <button class="tab-btn flex-fill" onclick="switchTab(2)">Sugerencias</button>
+            <button class="tab-btn flex-fill" onclick="switchTab(3)">Quejas</button>
+            <button class="tab-btn flex-fill" onclick="switchTab(4)">Pendientes</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="stat-card mb-3">
+            <div class="d-flex gap-2">
+                <div class="flex-grow-1 position-relative">
+                    <i class="bi bi-search position-absolute" style="left: 12px; top: 10px; color: var(--text-gray);"></i>
+                    <input type="text" class="form-control" placeholder="Buscar feedback..." style="padding-left: 40px; background-color: #F8FAFC; border: none;">
+                </div>
+                <button class="btn" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">
+                    <i class="bi bi-funnel me-2"></i>Filtros
+                </button>
+            </div>
+        </div>
+
+        <!-- Feedback Cards -->
+        <div class="feedback-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="avatar">AG</div>
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h6 class="mb-0" style="color: var(--primary-dark);">Ana García</h6>
+                            <small class="text-muted">2025-10-01</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex gap-1">
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                            </div>
+                            <span class="badge" style="background-color: var(--primary-blue); color: white;">Reseña</span>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Servicio</span>
+                        </div>
+                    </div>
+                    <p class="mb-3" style="color: var(--primary-dark);">Excelente plataforma, muy fácil de usar. He vendido varios libros sin problemas.</p>
+                    <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Responder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="avatar">CR</div>
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h6 class="mb-0" style="color: var(--primary-dark);">Carlos Ruiz</h6>
+                            <small class="text-muted">2025-10-02</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex gap-1">
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star star-empty"></i>
+                            </div>
+                            <span class="badge" style="background-color: var(--primary-blue); color: white;">Reseña</span>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Transacción</span>
+                        </div>
+                    </div>
+                    <p class="mb-3" style="color: var(--primary-dark);">Buena experiencia en general, aunque el proceso de pago podría ser más rápido.</p>
+                    <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Responder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="avatar">ML</div>
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h6 class="mb-0" style="color: var(--primary-dark);">María López</h6>
+                            <small class="text-muted">2025-10-02</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge" style="background-color: #DBEAFE; color: #1E40AF;">Sugerencia</span>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Funcionalidad</span>
+                        </div>
+                    </div>
+                    <p class="mb-3" style="color: var(--primary-dark);">Sería genial tener una app móvil nativa para mayor comodidad.</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Responder</button>
+                        <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Aprobar</button>
+                        <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Rechazar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="avatar">JP</div>
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h6 class="mb-0" style="color: var(--primary-dark);">Juan Pérez</h6>
+                            <small class="text-muted">2025-10-03</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex gap-1">
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star star-empty"></i>
+                                <i class="bi bi-star star-empty"></i>
+                                <i class="bi bi-star star-empty"></i>
+                            </div>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Queja</span>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Soporte</span>
+                        </div>
+                    </div>
+                    <p class="mb-3" style="color: var(--primary-dark);">Tuve un problema con una transacción y tardaron en responder mi consulta.</p>
+                    <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Responder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="avatar">LM</div>
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h6 class="mb-0" style="color: var(--primary-dark);">Laura Martín</h6>
+                            <small class="text-muted">2025-10-03</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex gap-1">
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                                <i class="bi bi-star-fill star-filled"></i>
+                            </div>
+                            <span class="badge" style="background-color: var(--primary-blue); color: white;">Reseña</span>
+                            <span class="badge" style="background-color: white; color: var(--primary-dark); border: 1px solid var(--border-color);">Comunidad</span>
+                        </div>
+                    </div>
+                    <p class="mb-3" style="color: var(--primary-dark);">Me encanta la función de eventos, he conocido a otros amantes de los libros.</p>
+                    <button class="btn btn-sm" style="background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--border-color);">Responder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[index].classList.add('active');
+        }
+    </script>
+</body>
+</html>

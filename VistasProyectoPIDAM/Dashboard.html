@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1E3A5F;
+            --primary-blue: #60A5FA;
+            --primary-light: #F0F7FF;
+            --border-color: #CBD5E1;
+            --text-gray: #64748B;
+        }
+        body {
+            background-color: var(--primary-light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .sidebar {
+            min-height: 100vh;
+            border-right: 1px solid var(--border-color);
+        }
+        .sidebar-link {
+            color: var(--primary-dark);
+            border-radius: 12px;
+            transition: background-color 0.2s;
+        }
+        .sidebar-link:hover {
+            background-color: var(--primary-light);
+        }
+        .sidebar-link.active {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        .card-custom {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+        .badge-upcoming {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        .badge-ongoing {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+        .badge-finished {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--primary-dark);
+        }
+        .calendar-day {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .calendar-day.active {
+            background-color: #BFDBFE;
+            color: #1E40AF;
+        }
+        .calendar-day.other-month {
+            color: var(--text-gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-auto px-0 bg-white sidebar">
+                <div class="d-flex flex-column" style="width: 256px;">
+                    <!-- Logo -->
+                    <div class="p-3 border-bottom" style="height: 69px;">
+                        <img src="https://placehold.co/78x58" alt="Logo" style="height: 40px;">
+                    </div>
+                    
+                    <!-- Menu Items -->
+                    <div class="flex-grow-1 p-3">
+                        <div class="d-flex flex-column gap-2">
+                            <a href="Dashboard.html" class="sidebar-link active d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-grid"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            <a href="Usuarios.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-people"></i>
+                                <span>Usuarios</span>
+                            </a>
+                            <a href="Transacciones.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-credit-card"></i>
+                                <span>Transacciones</span>
+                            </a>
+                            <a href="LibrosPublicados.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-book"></i>
+                                <span>Libros</span>
+                            </a>
+                            <a href="Eventos.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-calendar-event"></i>
+                                <span>Eventos</span>
+                            </a>
+                            <a href="Reportes.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-file-text"></i>
+                                <span>Reportes</span>
+                            </a>
+                            <a href="Feedback.html" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                                <i class="bi bi-chat-left-text"></i>
+                                <span>Feedback</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Logout -->
+                    <div class="p-3 border-top">
+                        <a href="#" class="sidebar-link d-flex align-items-center gap-3 px-3 py-2 text-decoration-none">
+                            <i class="bi bi-box-arrow-left"></i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col p-4">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="mb-0" style="color: var(--primary-dark);">Eventos</h2>
+                        <p class="mb-0" style="color: var(--text-gray);">Organiza y gestiona eventos literarios</p>
+                    </div>
+                    <button class="btn btn-primary" style="background-color: var(--primary-blue); border: none;">
+                        <i class="bi bi-plus-lg me-2"></i>Crear Evento
+                    </button>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3">
+                            <p class="mb-2" style="color: var(--text-gray);">Eventos Totales</p>
+                            <h4 class="mb-0" style="color: var(--primary-dark);">127</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3">
+                            <p class="mb-2" style="color: var(--text-gray);">Próximos</p>
+                            <h4 class="mb-0 text-primary">24</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3">
+                            <p class="mb-2" style="color: var(--text-gray);">En curso</p>
+                            <h4 class="mb-0 text-success">3</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3">
+                            <p class="mb-2" style="color: var(--text-gray);">Participantes</p>
+                            <h4 class="mb-0" style="color: var(--primary-dark);">2,345</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!-- Events List -->
+                    <div class="col-lg-8">
+                        <!-- Search Bar -->
+                        <div class="card card-custom p-3 mb-3">
+                            <div class="d-flex gap-2">
+                                <div class="input-group flex-grow-1">
+                                    <span class="input-group-text bg-light border-0">
+                                        <i class="bi bi-search" style="color: var(--text-gray);"></i>
+                                    </span>
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Buscar eventos...">
+                                </div>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="bi bi-funnel me-2"></i>Filtros
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Event Cards -->
+                        <div class="d-flex flex-column gap-3">
+                            <!-- Event 1 -->
+                            <div class="card card-custom p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="mb-1" style="color: var(--primary-dark);">Club de Lectura - Noviembre</h5>
+                                        <p class="mb-0" style="color: var(--text-gray);">Discutiremos "Cien años de soledad"</p>
+                                    </div>
+                                    <span class="badge badge-upcoming rounded-pill px-3">Próximo</span>
+                                </div>
+                                <div class="d-flex gap-4 mb-3" style="color: var(--text-gray);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>2025-11-15 - 18:00</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Biblioteca Central</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people"></i>
+                                        <span>25 / 30</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Ver detalles</button>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-primary">Participantes</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Event 2 -->
+                            <div class="card card-custom p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="mb-1" style="color: var(--primary-dark);">Feria del Libro Usado</h5>
+                                        <p class="mb-0" style="color: var(--text-gray);">Intercambio y venta de libros usados</p>
+                                    </div>
+                                    <span class="badge badge-upcoming rounded-pill px-3">Próximo</span>
+                                </div>
+                                <div class="d-flex gap-4 mb-3" style="color: var(--text-gray);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>2025-11-20 - 10:00</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Plaza Mayor</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people"></i>
+                                        <span>150 / 200</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Ver detalles</button>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-primary">Participantes</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Event 3 -->
+                            <div class="card card-custom p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="mb-1" style="color: var(--primary-dark);">Encuentro con Autor</h5>
+                                        <p class="mb-0" style="color: var(--text-gray);">Sesión de firma con María Dueñas</p>
+                                    </div>
+                                    <span class="badge badge-ongoing rounded-pill px-3">En curso</span>
+                                </div>
+                                <div class="d-flex gap-4 mb-3" style="color: var(--text-gray);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>2025-10-28 - 19:00</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Librería El Ateneo</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people"></i>
+                                        <span>48 / 50</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Ver detalles</button>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-primary">Participantes</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Event 4 -->
+                            <div class="card card-custom p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="mb-1" style="color: var(--primary-dark);">Taller de Escritura Creativa</h5>
+                                        <p class="mb-0" style="color: var(--text-gray);">Aprende técnicas de escritura</p>
+                                    </div>
+                                    <span class="badge badge-upcoming rounded-pill px-3">Próximo</span>
+                                </div>
+                                <div class="d-flex gap-4 mb-3" style="color: var(--text-gray);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>2025-12-05 - 16:00</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Centro Cultural</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people"></i>
+                                        <span>12 / 20</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Ver detalles</button>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-primary">Participantes</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Event 5 -->
+                            <div class="card card-custom p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="mb-1" style="color: var(--primary-dark);">Maratón de Lectura</h5>
+                                        <p class="mb-0" style="color: var(--text-gray);">Evento de lectura al aire libre</p>
+                                    </div>
+                                    <span class="badge badge-finished rounded-pill px-3">Finalizado</span>
+                                </div>
+                                <div class="d-flex gap-4 mb-3" style="color: var(--text-gray);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-calendar"></i>
+                                        <span>2025-09-30 - 10:00</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Parque del Retiro</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people"></i>
+                                        <span>85 / 100</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Ver detalles</button>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-primary">Participantes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar Right -->
+                    <div class="col-lg-4">
+                        <!-- Calendar -->
+                        <div class="card card-custom p-3 mb-3">
+                            <h6 class="mb-4" style="color: var(--primary-dark);">Calendario</h6>
+                            <div class="text-center mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button class="btn btn-sm btn-outline-secondary border rounded-3" style="opacity: 0.5;">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </button>
+                                    <strong style="color: var(--primary-dark);">October 2025</strong>
+                                    <button class="btn btn-sm btn-outline-secondary border rounded-3" style="opacity: 0.5;">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 px-2">
+                                    <small class="text-muted" style="width: 32px;">Su</small>
+                                    <small class="text-muted" style="width: 32px;">Mo</small>
+                                    <small class="text-muted" style="width: 32px;">Tu</small>
+                                    <small class="text-muted" style="width: 32px;">We</small>
+                                    <small class="text-muted" style="width: 32px;">Th</small>
+                                    <small class="text-muted" style="width: 32px;">Fr</small>
+                                    <small class="text-muted" style="width: 32px;">Sa</small>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <div class="calendar-day other-month">28</div>
+                                    <div class="calendar-day other-month">29</div>
+                                    <div class="calendar-day other-month">30</div>
+                                    <div class="calendar-day">1</div>
+                                    <div class="calendar-day">2</div>
+                                    <div class="calendar-day">3</div>
+                                    <div class="calendar-day">4</div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <div class="calendar-day">5</div>
+                                    <div class="calendar-day active">6</div>
+                                    <div class="calendar-day">7</div>
+                                    <div class="calendar-day">8</div>
+                                    <div class="calendar-day">9</div>
+                                    <div class="calendar-day">10</div>
+                                    <div class="calendar-day">11</div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <div class="calendar-day">12</div>
+                                    <div class="calendar-day">13</div>
+                                    <div class="calendar-day">14</div>
+                                    <div class="calendar-day">15</div>
+                                    <div class="calendar-day">16</div>
+                                    <div class="calendar-day">17</div>
+                                    <div class="calendar-day">18</div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <div class="calendar-day">19</div>
+                                    <div class="calendar-day">20</div>
+                                    <div class="calendar-day">21</div>
+                                    <div class="calendar-day">22</div>
+                                    <div class="calendar-day">23</div>
+                                    <div class="calendar-day">24</div>
+                                    <div class="calendar-day">25</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="calendar-day">26</div>
+                                    <div class="calendar-day">27</div>
+                                    <div class="calendar-day">28</div>
+                                    <div class="calendar-day">29</div>
+                                    <div class="calendar-day">30</div>
+                                    <div class="calendar-day">31</div>
+                                    <div class="calendar-day other-month">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Upcoming Events -->
+                        <div class="card card-custom p-3">
+                            <h6 class="mb-4" style="color: var(--primary-dark);">Próximos eventos</h6>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="border-bottom pb-3">
+                                    <p class="mb-1 text-primary">Club de Lectura - Noviembre</p>
+                                    <small style="color: var(--text-gray);">2025-11-15</small>
+                                </div>
+                                <div class="border-bottom pb-3">
+                                    <p class="mb-1 text-primary">Feria del Libro Usado</p>
+                                    <small style="color: var(--text-gray);">2025-11-20</small>
+                                </div>
+                                <div>
+                                    <p class="mb-1 text-primary">Taller de Escritura Creativa</p>
+                                    <small style="color: var(--text-gray);">2025-12-05</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
