@@ -1,5 +1,13 @@
 <div class="card-shadow">
-    @for (vehicle of vehicles; track vehicle.name){
-        <li>{{vehicle.name}}</li>
-    }
+  @for (vehicle of vehicles; track vehicle.name){
+  <div class="card" style="width: 18rem">
+    <div class="card-header">Featured</div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ vehicle.name }}</li>
+      <li class="list-group-item">{{ vehicle.model }}</li>
+      <li class="list-group-item">{{ vehicle.manufacturer }}</li>
+      <a routerLink="/detail/id" >Detalles</a>
+    </ul>
+  </div>
+  }
 </div>
