@@ -1,0 +1,24 @@
+.event-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(119, 2, 255, 0.15) !important;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #f0070c 0%, #7702ff 100%);
+  color: white;
+  border: none;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
+  color: white;
+}

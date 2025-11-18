@@ -1,0 +1,33 @@
+.event-hero-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #f0070c 0%, #7702ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #f0070c 0%, #7702ff 100%);
+  color: white;
+  border: none;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+.sticky-top {
+  position: sticky;
+}
+
+@media (max-width: 991px) {
+  .sticky-top {
+    position: relative !important;
+  }
+}

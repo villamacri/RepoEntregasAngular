@@ -1,0 +1,28 @@
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-gradient">Eventos Disponibles</h1>
+    <p class="lead text-muted">Descubre los mejores eventos cerca de ti</p>
+  </div>
+
+  @if (isLoading) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-3 text-muted">Cargando eventos...</p>
+    </div>
+  } @else if (eventList.length === 0) {
+    <div class="text-center py-5">
+      <h2 class="h3">No hay eventos disponibles</h2>
+      <p class="text-muted">Vuelve más tarde para ver nuevos eventos</p>
+    </div>
+  } @else {
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      @for (event of eventList; track event.id) {
+        <div class="col">
+          <app-event-item-component [event]="event" />
+        </div>
+      }
+    </div>
+  }
+</div>
