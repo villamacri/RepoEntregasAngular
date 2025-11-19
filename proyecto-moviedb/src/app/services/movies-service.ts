@@ -13,7 +13,7 @@ export class MoviesService {
   constructor(private http: HttpClient){}
 
   getMovies(): Observable<MovieResponse>{
-    return this.http.get<MovieResponse>(`${this.baseUrl}/movies?apiKey=${this.apiKey}`);
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie?api_Key=${this.apiKey}`);
   }
 }
 
