@@ -16,9 +16,18 @@ export class MoviesListComponent implements OnInit{
 
   constructor(private movieService: MoviesService) {}
 
+  //Este método trabaja con el token directamente para traer las respuestas de las solicitudes
+  ngOnInit(): void {
+    this.movieService.getMoviesByToken().subscribe((resp)=>{
+      this.movies=resp.results;
+    })
+  }
+  /*
+  //Este método trabaja con una api_key para traer las respuestas de las solicitudes.
   ngOnInit() {
     this.movieService.getMovies().subscribe((resp) => {
         this.movies = resp.results;
     });
   }
+  */
 }
