@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MovieResponse } from '../interfaces/movie-response';
+import { Movie, MovieResponse } from '../interfaces/movie-response';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +16,21 @@ export class MoviesService {
 
   constructor(private http: HttpClient){}
 
-  getMoviesByToken(): Observable<MovieResponse>{
+  getPopularMoviesByToken(): Observable<MovieResponse>{
     return this.http.get<MovieResponse>(this.baseUrl + '/movie/popular',{headers : this.headers});
   }
 
-  /*
-  getMovies(): Observable<MovieResponse>{
-    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}`);
+  
+  getTopRatedMovies(): Observable<MovieResponse>{
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/top_rated?api_key=${this.apiKey}`);
   }
-  */
+
+  getUpcomingMovies(): Observable<MovieResponse>{
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/upcoming?api_key=${this.apiKey}`);
+  }
+
+  getMovieById(id : number): Observable<Movie>{
+    return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`);
+  }
 }
 

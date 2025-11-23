@@ -10,24 +10,33 @@ import { RouterLink } from '@angular/router';
   templateUrl: './movies-list-component.html',
   styleUrl: './movies-list-component.css',
 })
-export class MoviesListComponent implements OnInit{
+export class MoviesListComponent implements OnInit {
   [x: string]: any;
   movies: Movie[] = [];
 
-  constructor(private movieService: MoviesService) {}
+  constructor(private movieService: MoviesService) { }
 
-  //Este método trabaja con el token directamente para traer las respuestas de las solicitudes
   ngOnInit(): void {
-    this.movieService.getMoviesByToken().subscribe((resp)=>{
-      this.movies=resp.results;
-    })
+    this.loadPopularMovies();
   }
-  /*
-  //Este método trabaja con una api_key para traer las respuestas de las solicitudes.
-  ngOnInit() {
-    this.movieService.getMovies().subscribe((resp) => {
-        this.movies = resp.results;
+  //Este método trabaja con el token directamente para traer las respuestas de las solicitudes
+  loadPopularMovies() {
+    this.movieService.getPopularMoviesByToken().subscribe((resp) => {
+      this.movies = resp.results;
     });
   }
-  */
+
+  //Este método trabaja con una api_key para traer las respuestas de las solicitudes.
+  loadTopRatedMovies() {
+    this.movieService.getTopRatedMovies().subscribe((resp) => {
+      this.movies = resp.results;
+    });
+  }
+
+  loadUpcomingMovies() {
+    this.movieService.getUpcomingMovies().subscribe((resp) => {
+      this.movies = resp.results;
+    });
+  }
+
 }
