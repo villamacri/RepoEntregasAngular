@@ -19,4 +19,8 @@ export class HomePageService {
   getMoviePopular(): Observable<MoviePopularResponse> {
     return this.http.get<MoviePopularResponse>(this.baseUrl + '/movie/popular');
   }
+
+  getMoviePopularDetail(id: String):Observable<MoviePopularResponse>{
+    return this.http.get<MoviePopularResponse>(this.baseUrl + `/movie/${id}`)
+  }
 }
