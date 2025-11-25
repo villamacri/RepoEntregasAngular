@@ -1,0 +1,19 @@
+<div class="progress">
+    <div
+        class="progress-bar"
+        role="progressbar"
+        [style.width.%]="valor"
+        [ngClass]="'bg-'+color"
+        [class.progress-bar-striped]="striped"
+        [class.progress-bar-animated]="striped"
+        aria-valuemin="0"
+        aria-valuemax="100">
+
+    @if (showText) {
+        <span>
+            {{valor}}%
+        </span>
+    }
+
+    </div>
+</div>
