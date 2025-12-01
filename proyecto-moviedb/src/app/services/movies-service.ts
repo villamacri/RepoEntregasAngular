@@ -8,29 +8,25 @@ import { Movie, MovieResponse } from '../interfaces/movie-response';
 })
 export class MoviesService {
   
-  API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTg1YmI0OTZiYmIyMDViZWU1OGM1NzY4ZTI3NDg5ZiIsIm5iZiI6MTc2MzM2NzY4My43MTI5OTk4LCJzdWIiOiI2OTFhZGIwM2E2YTU5N2JmOWY2ZDkyZGMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.dP4DqUP92sOPJ3yFn1T9pDyzFzfwK8UG8PlcdMrinL0";
-  headers = {'Authorization': `Bearer ${this.API_TOKEN}`};
-
-  apiKey = "0a85bb496bbb205bee58c5768e27489f";
   baseUrl="https://api.themoviedb.org/3";
 
   constructor(private http: HttpClient){}
 
-  getPopularMoviesByToken(): Observable<MovieResponse>{
-    return this.http.get<MovieResponse>(this.baseUrl + '/movie/popular',{headers : this.headers});
+  getMoviesByGenre(tipo: 'movie' | 'tv', genreId: string): Observable<MovieResponse>{
+    
+    return this.http.get<MovieResponse>(`${this.baseUrl}/discover/${tipo}`,{
+      params: {
+        with_genres: genreId
+      }
+    });
   }
 
-  
+  getPopularMovies(): Observable<MovieResponse>{
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/popular`);
+  }
+
   getTopRatedMovies(): Observable<MovieResponse>{
-    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/top_rated?api_key=${this.apiKey}`);
-  }
-
-  getUpcomingMovies(): Observable<MovieResponse>{
-    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/upcoming?api_key=${this.apiKey}`);
-  }
-
-  getMovieById(id : number): Observable<Movie>{
-    return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`);
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/top_rated`);
   }
 }
 

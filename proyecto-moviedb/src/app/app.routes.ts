@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
-import { MoviesListComponent } from './components/movies-list-component/movies-list-component';
-import { MovieDetail } from './components/movie-detail/movie-detail';
+import { MovieDiscoverPage } from './pages/movie-discover-page/movie-discover-page';
+import { UserListsPage } from './pages/user-lists-page/user-lists-page';
 
 export const routes: Routes = [
     {
         path:'popular',
-        component:MoviesListComponent
+        component:MovieDiscoverPage
     },
     {
-        path:'movie/:id',
-        component: MovieDetail
+        path: 'my-lists',
+        component: UserListsPage
     },
     {
         path:'',
-        component:MoviesListComponent,
+        component:MovieDiscoverPage,
         pathMatch:'full'
     }
 

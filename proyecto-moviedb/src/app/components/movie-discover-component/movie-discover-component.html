@@ -1,0 +1,67 @@
+<nav class="navbar navbar-dark bg-dark mb-4">
+  <div class="container">
+    <span class="navbar-brand mb-0 h1"> 🎬 TMDB Angular App </span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Filtros de Búsqueda</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label fw-bold">¿Qué buscas?</label>
+          <select #typeSelect class="form-select" (change)="onTypeChange(typeSelect.value)">
+            <option value="movie" selected>🎥 Películas</option>
+            <option value="tv">📺 Series TV</option>
+          </select>
+        </div>
+
+        <div class="col-md-8">
+          <label class="form-label fw-bold">Género</label>
+          <select #genreSelect class="form-select" (change)="onGenreChange(genreSelect.value)">
+            <option value="" disabled selected>Selecciona una opción...</option>
+
+            @for (genre of genres; track genre.id) {
+            <option [value]="genre.id">{{ genre.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (results.length > 0) {
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+  @for (item of results; track item.id) {
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="card-title text-truncate" title="{{ item.title || item.name }}">
+          {{ item.title || item.name }}
+        </h6>
+
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <span class="badge bg-warning text-dark">
+            ⭐ {{ item.vote_average | number : '1.1-1' }}
+          </span>
+          <small class="text-muted">
+            {{ item.release_date || item.first_air_date | date : 'yyyy' }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+} @else {
+<div class="alert alert-info text-center mt-5" role="alert">
+  ℹ️ Selecciona un género para ver los resultados.
+</div>
+}

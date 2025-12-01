@@ -1,0 +1,46 @@
+<!-- src/app/pages/user-lists-page/user-lists-page.html -->
+
+<div class="container mt-4">
+  <h1 class="mb-4">📋 Mis Listas de Películas</h1>
+
+  <!-- Mostrar mientras carga -->
+  @if (isLoading) {
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+  }
+
+  <!-- Mostrar si hay error -->
+  @else if (errorMessage) {
+  <div class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+  }
+
+  <!-- Mostrar si no hay listas -->
+  @else if (lists.length === 0) {
+  <div class="alert alert-info" role="alert">No tienes listas creadas aún.</div>
+  }
+
+  <!-- Mostrar las listas -->
+  @else {
+  <div class="row">
+    @for (list of lists; track list.id) {
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ list.name }}</h5>
+          <p class="card-text">{{ list.description }}</p>
+          <div class="d-flex justify-content-between">
+            <span class="badge bg-primary"> {{ list.item_count }} películas </span>
+            <span class="badge bg-warning text-dark"> ⭐ {{ list.favorite_count }} favoritos </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
