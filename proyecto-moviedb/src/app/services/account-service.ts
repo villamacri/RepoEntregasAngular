@@ -12,6 +12,12 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   getAccountLists(accountId: string): Observable<AccountListsResponse> {
-    return this.http.get<AccountListsResponse>(`${this.baseUrl}/account/${accountId}/lists`);
+    const sessionId = localStorage.getItem('session_id');
+
+    return this.http.get<AccountListsResponse>(`${this.baseUrl}/account/${accountId}/lists`, {
+      params: {
+        session_id: sessionId || '',
+      },
+    });
   }
 }

@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account-service';
 import { MovieList } from '../../interfaces/account-list-response';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-lists-page',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-lists-page.html',
   styleUrl: './user-lists-page.css',
 })
